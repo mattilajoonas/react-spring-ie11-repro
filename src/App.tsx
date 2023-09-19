@@ -1,6 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { animated, useSpring } from "@react-spring/web";
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+const DivWithInterpolation = () => {
+  const props = useSpring({
+    from: { x: 0 },
+    to: { x: 360 },
+  });
+
+  return (
+    <animated.div
+      style={{
+        transform: props.x.interpolate((value) => `rotateZ(${value}deg)`),
+      }}
+    >
+      Hello World
+    </animated.div>
+  );
+};
 
 function App() {
   return (
@@ -19,6 +37,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <DivWithInterpolation />
     </div>
   );
 }
